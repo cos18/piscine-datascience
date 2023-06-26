@@ -3,7 +3,7 @@
 # https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
 def all_thing_is_obj(object: any) -> int:
     try:
-        it = iter(object)
+        iter(object)
     except TypeError:
         print('Type not found')
     else:

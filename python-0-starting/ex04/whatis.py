@@ -8,7 +8,7 @@ try:
     try:
         value = int(argv[1])
         print(f"I'm {'Odd' if int(argv[1]) % 2 else 'Even'}.")
-    except:
+    except ValueError:
         raise AssertionError('argument is not an integer')
 except AssertionError as err:
     print(f"{type(err).__name__} : {err}")
