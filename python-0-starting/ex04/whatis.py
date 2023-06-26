@@ -7,7 +7,7 @@ try:
         raise AssertionError('more than one argument is provided')
     try:
         value = int(argv[1])
-        print(f"I'm {'Odd' if int(argv[1]) % 2 else 'Even'}.")
+        print(f"I'm {'Odd' if value % 2 else 'Even'}.")
     except ValueError:
         raise AssertionError('argument is not an integer')
 except AssertionError as err:
