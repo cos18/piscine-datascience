@@ -1,7 +1,7 @@
 def main():
-    '''
+    """
     Main function of this exercise
-    '''
+    """
     pass
 
 
