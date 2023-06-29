@@ -85,7 +85,6 @@ def main():
         print(f"New shape after Transpose: {transpose.shape}")
         print(transpose)
         Image.fromarray(transpose).show()
-        print(type(origin.dtype))
     except Exception as err:
         print(f"{type(err).__name__} : {err}")
 
