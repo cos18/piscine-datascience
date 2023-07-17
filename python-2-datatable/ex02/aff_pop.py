@@ -26,6 +26,7 @@ def unit_string_to_raw_string(value: str) -> str:
         raise TypeError('value string is not unit number')
     return str(int(result))
 
+
 def main():
     """
     loads the file `population_total.csv`,
@@ -37,19 +38,18 @@ def main():
         data = data.iloc[1:].applymap(unit_string_to_raw_string).astype(int)
         data.index = data.index.astype(int)
 
-        _, ax = plt.subplots()
-        ax.set(xlabel='Year', ylabel='Population',
-               title='Population Projections')
-        ax.grid()
-        ax.legend()
-        data.loc[data.index <= 2050, ['South Korea', 'Japan']].plot()
+        ax = data.loc[data.index <= 2050, ['South Korea', 'Japan']].plot(
+            xlabel='Year',
+            ylabel='Population',
+            title='Population Projections'
+        )
+        ax.legend(loc='lower right')
+        ax.set_yticks([30000000, 60000000, 90000000, 120000000])
+        ax.set_yticklabels(['30M', '60M', '90M', '120M'])
         plt.show()
-
-        # TODO: 라벨 타이틀 왜안나오지 legend 위치 변경해야함, y축 단위 변경 필요할까?
     except Exception as err:
         print(f"{type(err).__name__} : {err}")
 
 
 if __name__ == "__main__":
     main()
-
