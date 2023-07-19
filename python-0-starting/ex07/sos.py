@@ -13,9 +13,9 @@ def get_morse(c: str) -> str:
     Returns:
         str: Corresponding Morse Code
     """
-    
+
     NESTED_MORSE = {
-        ' ': '/ ',
+        ' ': '/',
         'A': '.-',
         'B': '-...',
         'C': '-.-.',
