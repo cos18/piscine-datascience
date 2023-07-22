@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "python-4-dop"
+version = "0.1.0"
+description = ""
+authors = ["Sungwoo Park <codest99@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flake8 = "^6.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
