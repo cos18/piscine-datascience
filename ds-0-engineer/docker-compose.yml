@@ -1,0 +1,38 @@
+version: "3.8"
+name: piscine-ds
+
+services:
+  db:
+    image: postgres:15.3
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - /goinfre/sunpark:/var/lib/postgresql/goinfre
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_USER: sunpark
+      POSTGRES_DB: piscineds
+      POSTGRES_PASSWORD: mysecretpassword
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "db", "-p", "5432"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+  pgadmin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4:7.4
+    volumes:
+      - ./data/pgpass:/pgpass
+      - ./data/servers.json:/pgadmin4/servers.json
+    ports:
+      - 8080:80
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sunpark@student.42seoul.kr
+      PGADMIN_DEFAULT_PASSWORD: mysecretpassword
+
+volumes:
+  db-data:

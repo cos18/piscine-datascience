@@ -1,0 +1,1 @@
+mkdir -p ~/goinfre/export/items && psql "postgresql://sunpark:mysecretpassword@localhost/piscineds" -f items_table.sql

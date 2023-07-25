@@ -1,0 +1,1 @@
+mkdir -p ~/goinfre/export/customer && psql "postgresql://sunpark:mysecretpassword@localhost/piscineds" -f automatic_table.sql
