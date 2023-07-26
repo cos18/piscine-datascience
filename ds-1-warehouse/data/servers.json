@@ -1,0 +1,14 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "Piscine Data Science DB",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "sunpark",
+            "PassFile": "/pgpass",
+            "Host": "db",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres"
+        }
+    }
+}
