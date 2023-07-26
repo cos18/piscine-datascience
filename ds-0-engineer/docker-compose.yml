@@ -5,8 +5,8 @@ services:
   db:
     image: postgres:15.3
     volumes:
-      - db-data:/var/lib/postgresql/data
-      - /goinfre/sunpark:/var/lib/postgresql/goinfre
+      - /goinfre/sunpark/postgresql:/var/lib/postgresql/data
+      - /goinfre/sunpark/data:/var/lib/postgresql/goinfre
     ports:
       - 5432:5432
     restart: always
@@ -15,9 +15,9 @@ services:
       POSTGRES_DB: piscineds
       POSTGRES_PASSWORD: mysecretpassword
     healthcheck:
-      test: ["CMD", "pg_isready", "-h", "db", "-p", "5432"]
+      test: /usr/bin/pg_isready
       interval: 5s
-      timeout: 3s
+      timeout: 10s
       retries: 3
       start_period: 5s
   pgadmin:
@@ -33,6 +33,3 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: sunpark@student.42seoul.kr
       PGADMIN_DEFAULT_PASSWORD: mysecretpassword
-
-volumes:
-  db-data:
