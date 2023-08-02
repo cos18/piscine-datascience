@@ -13,6 +13,4 @@ CREATE TABLE IF NOT EXISTS public.customers
 select table_name
 from information_schema.tables
 where table_name like 'data_%_%'
-      and table_schema = 'public'
-order by table_name,
-         table_schema;
+      and table_schema = 'public';

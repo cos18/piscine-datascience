@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ds-1-warehouse"
+version = "0.1.0"
+description = ""
+authors = ["Sungwoo Park <codest99@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2-binary = "^2.9.6"
+notebook = "^7.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
