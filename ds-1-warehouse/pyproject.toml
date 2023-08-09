@@ -12,6 +12,10 @@ psycopg2-binary = "^2.9.6"
 notebook = "^7.0.0"
 yapf = "^0.40.1"
 
+[tool.poetry.scripts]
+lint = "yapf"
+#lint = { callable = "yapf", extras = ["-i", "*/*.py"] }
+
 
 [build-system]
 requires = ["poetry-core"]
