@@ -45,6 +45,7 @@ with psycopg2.connect(host='localhost',
         )
         db_list = list(cur.fetchall())
         db_list.sort(key=lambda db: db_key(db[0]))
+        print(db_list)
         cur.execute('DROP TABLE IF EXISTS public.customers;')
         cur.execute('''CREATE TABLE IF NOT EXISTS public.customers
                         (

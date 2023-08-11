@@ -11,6 +11,7 @@ python = "^3.10"
 psycopg2-binary = "^2.9.6"
 notebook = "^7.0.0"
 yapf = "^0.40.1"
+tqdm = "^4.66.1"
 
 [tool.poetry.scripts]
 lint = "yapf"
