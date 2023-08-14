@@ -12,6 +12,8 @@ psycopg2-binary = "^2.9.6"
 notebook = "^7.0.0"
 yapf = "^0.40.1"
 tqdm = "^4.66.1"
+pandas = "^2.0.3"
+sqlalchemy = "^2.0.19"
 
 [tool.poetry.scripts]
 lint = "yapf"

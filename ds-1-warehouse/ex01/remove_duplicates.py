@@ -1,46 +1,29 @@
-import psycopg2
-from tqdm import tqdm
-from datetime import timedelta
+from sqlalchemy import create_engine
+import pandas as pd
+import time
 
+processed_data = []
+start = time.time()
+engine = create_engine(
+    'postgresql://sunpark:mysecretpassword@localhost/piscineds', echo=False)
+print(f'[{time.time() - start:.2f}s] Start Program')
 
-def check_same(row_a, row_b):
-    return row_a[0] == row_b[0] and row_a[1] == row_b[1]\
-        and row_a[2] == row_b[2] and row_a[3] == row_b[3]
+for chunk in pd.read_sql('select * from customers', engine, chunksize=10**6):
+    processed_data.append(chunk)
+print(f'[{time.time() - start:.2f}s] Chunk complete')
 
+customers_df = pd.concat(processed_data)
+print(f'[{time.time() - start:.2f}s] Merge complete')
 
-def ctid_list_to_str(delete_ctid):
-    result = '('
-    for i in range(len(delete_ctid)):
-        result += str(delete_ctid[i])
-        if i != len(delete_ctid) - 1:
-            result += ','
-    result += ')'
-    return result
-
-
-with psycopg2.connect(host='localhost',
-                      dbname='piscineds',
-                      user='sunpark',
-                      password='mysecretpassword') as conn:
-    with conn.cursor() as cur:
-        print('Calculate distinct users...')
-        cur.execute('SELECT DISTINCT user_id FROM customers;')
-        users = cur.fetchall()
-        for user in tqdm(users, desc='search dup'):
-            cur.execute(
-                f'SELECT event_time, event_type, product_id, user_session, ctid FROM customers WHERE user_id = {user[0]} ORDER BY event_time;'
-            )
-            now = cur.fetchall()
-            delete_ctid = set()
-            for i in range(len(now)):
-                for j in range(i + 1, len(now)):
-                    if now[i][0] + timedelta(seconds=5) < now[j][0]:
-                        break
-                    if check_same(now[i], now[j]):
-                        delete_ctid.add(now[j][4])
-            print(delete_ctid)
-            if len(delete_ctid):
-                cur.execute(
-                    f'DELETE FROM customers WHERE ctid IN {ctid_list_to_str(list(delete_ctid))};'
-                )
-    conn.commit()
+customers_df.drop_duplicates(
+    ['event_type', 'product_id', 'price', 'user_id', 'user_session'],
+    inplace=True)
+print(f'[{time.time() - start:.2f}s] Drop duplicate complete')
+customers_df.sort_values('event_time', inplace=True)
+print(f'[{time.time() - start:.2f}s] Sort complete')
+customers_df.to_sql('customers',
+                    engine,
+                    if_exists='replace',
+                    index=False,
+                    chunksize=10**6)
+print(f'[{time.time() - start:.2f}s] ALL complete')
