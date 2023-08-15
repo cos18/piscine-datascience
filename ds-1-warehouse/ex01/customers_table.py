@@ -67,3 +67,13 @@ with psycopg2.connect(host='localhost',
     conn.commit()
 
 print(f'total time : {time.time() - start}')
+
+'''
+[('data_2022_oct',), ('data_2022_nov',), ('data_2022_dec',), ('data_2023_jan',), ('data_2023_feb',)]
+Insert data_2022_oct to customers complete : 58.24128699302673 sec
+Insert data_2022_nov to customers complete : 74.63472199440002 sec
+Insert data_2022_dec to customers complete : 52.385125160217285 sec
+Insert data_2023_jan to customers complete : 70.47860026359558 sec
+Insert data_2023_feb to customers complete : 60.66181302070618 sec
+total time : 316.65947699546814
+'''
