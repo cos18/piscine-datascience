@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS public.items
 );
 
 COPY items(product_id, category_id, category_code, brand)
-FROM '/var/lib/postgresql/goinfre/subject/item/item.csv'
+FROM '/var/lib/postgresql/goinfre/item/item.csv'
 DELIMITER ','
 CSV HEADER;
 
