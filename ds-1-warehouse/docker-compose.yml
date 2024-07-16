@@ -5,8 +5,8 @@ services:
   db:
     image: postgres:15.3
     volumes:
-      - /goinfre/sunpark/postgresql:/var/lib/postgresql/data
-      - /goinfre/sunpark/data:/var/lib/postgresql/goinfre
+      - /Users/cos/sunpark/postgresql:/var/lib/postgresql/data
+      - /Users/cos/sunpark/data:/var/lib/postgresql/goinfre
     ports:
       - 5432:5432
     restart: always
